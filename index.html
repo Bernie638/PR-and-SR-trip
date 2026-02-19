@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PMS Bistable Logic — Divisions A &amp; B</title>
+  <title>Reactor Protection System — Bistable Logic — Divisions A &amp; B</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body {
       margin: 0; padding: 0;
-      width: 100%; min-height: 100%;
+      width: 100%; height: 100%;
+      overflow: hidden;             /* pin to viewport — no scroll bars */
       background: #0f0f1a;
       font-family: 'Courier New', Courier, monospace;
       display: flex;
@@ -21,8 +22,8 @@
       flex-shrink: 0;
     }
     header h1 {
-      color: #5566aa;
-      font-size: 0.78rem;
+      color: #aabbdd;
+      font-size: 0.92rem;
       font-weight: normal;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -38,7 +39,16 @@
     #wrap {
       flex: 1;
       min-width: 0;
-      padding: 14px 10px;
+      min-height: 0;
+      padding: 8px 6px;
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+    }
+    #wrap svg {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     /* ── Power panel ─────────────────────────────────────────── */
@@ -53,17 +63,17 @@
       user-select: none;
     }
     #pp-title {
-      font-size: 0.58rem;
+      font-size: 0.75rem;
       letter-spacing: 0.22em;
-      color: #5566aa;
+      color: #aabbdd;
       text-align: center;
       text-transform: uppercase;
       line-height: 1.8;
       margin-bottom: 4px;
     }
     #pp-note {
-      font-size: 0.48rem;
-      color: #3a3a5a;
+      font-size: 0.6rem;
+      color: #667799;
       text-align: center;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -153,7 +163,7 @@
       position: absolute;
       left: 48px;
       bottom: 3px;
-      font-size: 0.55rem;
+      font-size: 0.7rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       white-space: nowrap;
@@ -166,7 +176,7 @@
     .ppzl {
       position: absolute;
       left: 50px; right: 8px;
-      font-size: 0.52rem;
+      font-size: 0.66rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       line-height: 1.45;
@@ -174,10 +184,10 @@
       align-items: center;
       pointer-events: none;
     }
-    #ppzl-pr   { bottom: 50%; top: 0;       color: #cc5533; opacity: 0.8; }
-    #ppzl-sr   { bottom: 25%; height: 25%;  color: #cc8800; opacity: 0.8; }
-    #ppzl-perm { bottom: 15%; height: 10%;  color: #22bb55; opacity: 0.8; }
-    #ppzl-low  { bottom:  0%; height: 15%;  color: #4499cc; opacity: 0.8; }
+    #ppzl-pr   { bottom: 50%; top: 0;       color: #dd6644; }
+    #ppzl-sr   { bottom: 25%; height: 25%;  color: #ddaa00; }
+    #ppzl-perm { bottom: 15%; height: 10%;  color: #33cc66; }
+    #ppzl-low  { bottom:  0%; height: 15%;  color: #55aadd; }
 
     /* ── Phase 3: "Energized" — signal always present (measurement wire,
        NOT gate output). Medium-bright divisional colour.
@@ -268,15 +278,15 @@
       margin-bottom: 5px;
     }
     .pp-scram-fn {
-      font-size: 0.48rem;
-      color: #5566aa;
+      font-size: 0.68rem;
+      color: #8899cc;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       min-width: 16px;
     }
     .pp-scram-count {
-      font-size: 0.58rem;
-      color: #5566aa;
+      font-size: 0.75rem;
+      color: #8899cc;
       letter-spacing: 0.08em;
       flex: 1;
       text-align: center;
@@ -284,10 +294,10 @@
     }
     .pp-scram-count.active { color: #ff4444; }
     .pp-scram-badge {
-      font-size: 0.48rem;
+      font-size: 0.62rem;
       letter-spacing: 0.2em;
-      color: #2a0000;
-      border: 1px solid #2a0000;
+      color: #441111;
+      border: 1px solid #441111;
       padding: 1px 3px;
       border-radius: 2px;
       text-transform: uppercase;
@@ -307,9 +317,9 @@
     }
     .pp-trip-sys { margin-bottom: 6px; }
     .pp-trip-lbl {
-      font-size: 0.48rem;
+      font-size: 0.68rem;
       letter-spacing: 0.18em;
-      color: #5566aa;
+      color: #aabbdd;
       text-transform: uppercase;
       margin-bottom: 4px;
       text-align: center;
@@ -323,12 +333,12 @@
       flex: 1;
       padding: 4px 0;
       font-family: 'Courier New', Courier, monospace;
-      font-size: 0.6rem;
+      font-size: 0.72rem;
       font-weight: bold;
       letter-spacing: 0.08em;
       background: #0f0f20;
-      color: #5566aa;
-      border: 1px solid #2a2a48;
+      color: #8899cc;
+      border: 1px solid #3a3a60;
       border-radius: 2px;
       cursor: pointer;
       user-select: none;
@@ -336,8 +346,8 @@
     }
     .pp-trip-btn:hover {
       background: #1a1a35;
-      border-color: #4455aa;
-      color: #8899cc;
+      border-color: #6677bb;
+      color: #aabbdd;
     }
     .pp-trip-btn.active {
       background: #2e1800;
@@ -355,20 +365,20 @@
       flex: 1;
       padding: 4px 0;
       font-family: 'Courier New', Courier, monospace;
-      font-size: 0.6rem;
+      font-size: 0.72rem;
       font-weight: bold;
       letter-spacing: 0.08em;
       background: #0f0f20;
-      color: #334433;
-      border: 1px solid #1a2a1a;
+      color: #557755;
+      border: 1px solid #2a4a2a;
       border-radius: 2px;
       cursor: pointer;
       user-select: none;
       transition: background 0.12s, color 0.12s, border-color 0.12s;
     }
-    .pp-blk-btn:hover { background: #0f1a0f; border-color: #2a4a2a; color: #4a7a4a; }
+    .pp-blk-btn:hover { background: #0f1a0f; border-color: #3a663a; color: #77aa77; }
     /* permissive active — button available to press */
-    .pp-blk-btn.perm-ready { border-color: #1f401f; color: #3a663a; }
+    .pp-blk-btn.perm-ready { border-color: #2a6a2a; color: #66bb66; }
     /* block latched — division is blocked */
     .pp-blk-btn.active { background: #001800; border-color: #00cc60; color: #00cc60; }
     /* SVG diagram button hit area — pointer cursor when hovering */
@@ -403,7 +413,7 @@
 <body>
 
 <header>
-  <h1>Plant Monitoring System &mdash; Bistable Logic &mdash; Divisions A &amp; B</h1>
+  <h1>Reactor Protection System &mdash; Bistable Logic &mdash; Divisions A &amp; B</h1>
 </header>
 
 <div id="main">
